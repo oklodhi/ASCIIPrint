@@ -1,12 +1,14 @@
 # ASCIIPrint
 A program to convert images into ASCII-art using The CImg Library.
 
+<!-- ![](placeholder image) -->
+
 ## Running the program
 The compilation steps are as follows:
 
   - **Make sure to download the CImg Library**
 
-    Visit http://cimg.eu/download.shtml
+    Visit [CImg website](http://cimg.eu/download.shtml)
 
   - **Image should be located in project folder**
   
