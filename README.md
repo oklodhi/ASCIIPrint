@@ -3,6 +3,12 @@ A program to convert images into ASCII-art using The CImg Library.
 
 <!-- ![](placeholder image) -->
 
+## Requirements
+
+- A C++ IDE
+- The CImg Library
+- A PNG or JPG for image input
+
 ## Running the program
 The compilation steps are as follows:
 
@@ -17,9 +23,3 @@ The compilation steps are as follows:
   - **Compile `main.cpp` in your favorite C++ IDE**
   
     Project compiled with Code::Blocks IDE
-
-## Requirements
-
-- A C++ IDE
-- CImg Library
-- An .PNG or .JPG for input
