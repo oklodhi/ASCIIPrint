@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 
 #include "CImg-2.3.4_pre072618/CImg.h"
 
@@ -94,7 +95,6 @@ int main() {
         for (int h = 0; h < imageHeight; h++) {
             int current_ascii_num = round(brightness_matrix[w][h] / brightness_to_ascii_ratio);
             ascii_matrix[w][h] = ascii_string[round(brightness_matrix[w][h] / brightness_to_ascii_ratio)];
-            cout << ascii_matrix[w][h] << endl;
         }
     }
 
@@ -118,5 +118,11 @@ int main() {
     cout << "The smallest value in ASCII matrix is: " << ascii_smallest << endl;
     cout << "The largest value in ASCII matrix is: " << ascii_largest << endl; */
 
+    /* Print ASCII art */
+    for (int w = 0; w < imageWidth; w++) {
+        for (int h = 0; h < imageHeight; h++) {
+            cout << ascii_matrix[w][h] << ascii_matrix[w][h] << ascii_matrix[w][h];
+        }
+    }
     return 0;
 }
