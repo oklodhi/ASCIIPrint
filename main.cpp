@@ -1,5 +1,6 @@
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
+#include <fstream>
 
 #include "CImg-2.3.4_pre072618/CImg.h"
 
@@ -9,7 +10,7 @@ using namespace cimg_library;
 int main() {
 
     /* Open "asciidog.jpg" as image object */
-    CImg <unsigned char> image("asciidog.jpg");
+    CImg <unsigned char> image("wwalczyszyn.png");
 
     /* Get image dimensions and color channels */
     int imageWidth = image.width();
@@ -24,41 +25,44 @@ int main() {
         cout << "Error: invalid image!" << endl;
     }
 
-    /* Load pixel RGB data into 2D array */
+    /* Load pixel RGB data into 2D array
+     Convert RBG tuples into brightness numbers
+     Convert brightness matrix to ASCII matrix */
     int pixel_matrix_red[imageWidth][imageHeight];
     int pixel_matrix_green[imageWidth][imageHeight];
     int pixel_matrix_blue[imageWidth][imageHeight];
 
-    cout << "Iterating through pixels... ";
+    int brightness_matrix[imageWidth][imageHeight];
+
+    char ascii_matrix[imageWidth][imageHeight];
+    string ascii_string = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+    float brightness_to_ascii_ratio = 4;
+
+    cout << "Iterating through pixels... " << endl << endl;
+    cout << "Brightness matrix size: " << imageWidth << " x " << imageHeight << endl;
+    cout << "Iterating through pixel brightnesses... " << endl << endl;
+    cout << "Size of ASCII string: " << ascii_string.size() << endl << endl;
+
+    //for (int s = 0; s < ascii_string.size(); s++) {
+        //cout << ascii_string[s] << endl;
+    //}
 
     for (int w = 0; w < imageWidth; w++) {
         for (int h = 0; h < imageHeight; h++) {
             pixel_matrix_red[w][h] = image(w, h, 0, 0);
             pixel_matrix_green[w][h] = image(w, h, 0, 1);
             pixel_matrix_blue[w][h] = image(w, h, 2);
-
             //cout << "(" << pixel_matrix_red[w][h] << ", " << pixel_matrix_green[w][h] << ", " << pixel_matrix_blue[w][h] << ")" << endl;
-        }
-    }
 
-    cout << "Done!" << endl << endl;
-
-    /* Convert RBG tuples to brightness numbers
-    -- using the average of RGB values */
-    int brightness_matrix[imageWidth][imageHeight];
-
-    cout << "Brightness matrix size: " << imageWidth << " x " << imageHeight << endl;
-    cout << "Iterating through pixel brightnesses... ";
-
-    for (int w = 0; w < imageWidth; w++) {
-        for (int h = 0; h < imageHeight; h++) {
             brightness_matrix[w][h] = (pixel_matrix_red[w][h] + pixel_matrix_green[w][h] + pixel_matrix_blue[w][h]) / 3;
-
             // cout << brightness_matrix[w][h] << endl;
+
+            int current_ascii_num = round(brightness_matrix[w][h] / brightness_to_ascii_ratio);
+            ascii_matrix[w][h] = ascii_string[round(brightness_matrix[w][h] / brightness_to_ascii_ratio)];
         }
     }
 
-    cout << "Done!" << endl << endl;
+    cout << "Done!" << endl;
 
     /* TEST: find smallest & largest value in brightness matrix
     int brightness_smallest = 255;
@@ -80,24 +84,6 @@ int main() {
     cout << "The smallest value in brightness matrix is: " << brightness_smallest << endl;
     cout << "The largest value in brightness matrix is: " << brightness_largest << endl; */
 
-    /* Convert brightness_matrix to ASCII matrix */
-    char ascii_matrix[imageWidth][imageHeight];
-    string ascii_string = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
-    float brightness_to_ascii_ratio = 4;
-
-    cout << "Size of ASCII string: " << ascii_string.size() << endl;
-
-    //for (int s = 0; s < ascii_string.size(); s++) {
-        //cout << ascii_string[s] << endl;
-    //}
-
-    for (int w = 0; w < imageWidth; w++) {
-        for (int h = 0; h < imageHeight; h++) {
-            int current_ascii_num = round(brightness_matrix[w][h] / brightness_to_ascii_ratio);
-            ascii_matrix[w][h] = ascii_string[round(brightness_matrix[w][h] / brightness_to_ascii_ratio)];
-        }
-    }
-
     /* TEST: find smallest and largest value in ASCII matrix
     int ascii_smallest = 255;
     int ascii_largest = 0;
@@ -118,11 +104,17 @@ int main() {
     cout << "The smallest value in ASCII matrix is: " << ascii_smallest << endl;
     cout << "The largest value in ASCII matrix is: " << ascii_largest << endl; */
 
-    /* Print ASCII art */
-    for (int w = 0; w < imageWidth; w++) {
-        for (int h = 0; h < imageHeight; h++) {
-            cout << ascii_matrix[w][h] << ascii_matrix[w][h] << ascii_matrix[w][h];
+    /* Print ASCII art to a text file */
+    ofstream output;
+    output.open("FINAL_ASCII_ART.txt");
+
+    for (int h = 0; h < imageHeight; h++) {
+        for (int w = 0; w < imageWidth; w++) {
+            output << ascii_matrix[w][h] << ascii_matrix[w][h];
         }
+        output << endl;
     }
+
+    output.close();
     return 0;
 }
