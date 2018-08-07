@@ -7,7 +7,7 @@ The program makes use of The CImg Library to look at each pixel of the input ima
 - The CImg Library
 - A PNG or JPG for image input
 
-![](https://a.deviantart.net/avatars/w/w/wwalczyszyn.png?3) Example image used in project
+![](https://a.deviantart.net/avatars/w/w/wwalczyszyn.png?3) *Example image used in project*
 
 ## Running the program
 The compilation steps are as follows:
