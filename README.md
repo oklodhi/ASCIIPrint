@@ -1,5 +1,5 @@
 # ASCIIPrint
-A program to convert images into ASCII-art using The CImg Library.
+The program makes use of The CImg Library to look at each pixel of the input image, and then assign an ASCII character based on the brightness and color of the pixel. 
 
 ## Requirements
 
