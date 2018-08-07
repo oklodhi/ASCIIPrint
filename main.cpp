@@ -4,7 +4,6 @@
 
 #include "CImg-2.3.4_pre072618/CImg.h"
 
-using namespace std;
 using namespace cimg_library;
 
 int main() {
@@ -19,10 +18,10 @@ int main() {
 
     /* Check for valid image & print dimensions */
     if (image != NULL) {
-        cout << "Successfully loaded image!" << endl;
-        cout << "Image Size: " << imageWidth << " x " << imageHeight << " \t" << imageSpec << " channels" << endl;
+        std::cout << "Successfully loaded image!" << std::endl;
+        std::cout << "Image Size: " << imageWidth << " x " << imageHeight << " \t" << imageSpec << " channels" << std::endl;
     } else {
-        cout << "Error: invalid image!" << endl;
+        std::cout << "Error: invalid image!" << std::endl;
     }
 
     /* Load pixel RGB data into 2D array
@@ -35,13 +34,13 @@ int main() {
     int brightness_matrix[imageWidth][imageHeight];
 
     char ascii_matrix[imageWidth][imageHeight];
-    string ascii_string = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+    std::string ascii_string = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
     float brightness_to_ascii_ratio = 4;
 
-    cout << "Iterating through pixels... " << endl << endl;
-    cout << "Brightness matrix size: " << imageWidth << " x " << imageHeight << endl;
-    cout << "Iterating through pixel brightnesses... " << endl << endl;
-    cout << "Size of ASCII string: " << ascii_string.size() << endl << endl;
+    std::cout << "Iterating through pixels... " << std::endl << std::endl;
+    std::cout << "Brightness matrix size: " << imageWidth << " x " << imageHeight << std::endl;
+    std::cout << "Iterating through pixel brightnesses... " << std::endl << std::endl;
+    std::cout << "Size of ASCII string: " << ascii_string.size() << std::endl << std::endl;
 
     //for (int s = 0; s < ascii_string.size(); s++) {
         //cout << ascii_string[s] << endl;
@@ -62,7 +61,7 @@ int main() {
         }
     }
 
-    cout << "Done!" << endl;
+    std::cout << "Done!" << std::endl;
 
     /* TEST: find smallest & largest value in brightness matrix
     int brightness_smallest = 255;
@@ -105,14 +104,14 @@ int main() {
     cout << "The largest value in ASCII matrix is: " << ascii_largest << endl; */
 
     /* Print ASCII art to a text file */
-    ofstream output;
+    std::ofstream output;
     output.open("FINAL_ASCII_ART.txt");
 
     for (int h = 0; h < imageHeight; h++) {
         for (int w = 0; w < imageWidth; w++) {
             output << ascii_matrix[w][h] << ascii_matrix[w][h];
         }
-        output << endl;
+        output << std::endl;
     }
 
     output.close();
